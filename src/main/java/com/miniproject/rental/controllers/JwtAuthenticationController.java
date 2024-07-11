@@ -19,7 +19,6 @@ import java.util.Objects;
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
-
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
