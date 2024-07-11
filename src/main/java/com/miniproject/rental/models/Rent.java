@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,8 +32,8 @@ public class Rent {
 
     @CreationTimestamp
     @Column(name = "rent_at")
-    private ZonedDateTime rentAt;
+    private LocalDateTime rentAt;
 
     @Column(name = "return_at")
-    private ZonedDateTime returnAt;
+    private LocalDateTime returnAt;
 }

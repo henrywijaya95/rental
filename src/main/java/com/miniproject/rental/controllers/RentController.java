@@ -27,10 +27,10 @@ import static com.miniproject.rental.utilities.Constants.ID;
 @RequestMapping("rent/")
 public class RentController {
     @Autowired
-    RentMapper rentMapper;
+    private RentMapper rentMapper;
 
     @Autowired
-    RentService rentService;
+    private RentService rentService;
 
     @ApiOperation(value = "return create", authorizations = { @Authorization(value = "jwtToken") })
     @PostMapping(value = "create")

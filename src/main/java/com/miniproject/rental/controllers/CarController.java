@@ -28,10 +28,10 @@ import static com.miniproject.rental.utilities.Constants.*;
 @RequestMapping("car/")
 public class CarController {
     @Autowired
-    CarMapper carMapper;
+    private CarMapper carMapper;
 
     @Autowired
-    CarService carService;
+    private CarService carService;
 
     @ApiOperation(value = "return create", authorizations = { @Authorization(value = "jwtToken") })
     @PostMapping(value = "create")

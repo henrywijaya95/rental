@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -20,7 +20,7 @@ public class RentDTO {
     @NotNull
     private CarDTO carDTO;
 
-    private ZonedDateTime rentAt;
+    private LocalDateTime rentAt;
 
-    private ZonedDateTime returnAt;
+    private LocalDateTime returnAt;
 }

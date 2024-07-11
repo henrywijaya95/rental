@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +19,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RentService {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    RentRepository rentRepository;
+    private RentRepository rentRepository;
 
     @Transactional(rollbackFor = Throwable.class)
     public Rent create(Rent newRent) {
@@ -32,7 +32,7 @@ public class RentService {
     @Transactional(rollbackFor = Throwable.class)
     public Rent update( Long rentId) {
         Rent finalizedRent = getById(rentId);
-        finalizedRent.setReturnAt(ZonedDateTime.now());
+        finalizedRent.setReturnAt(LocalDateTime.now());
 
         return rentRepository.save(finalizedRent);
     }
