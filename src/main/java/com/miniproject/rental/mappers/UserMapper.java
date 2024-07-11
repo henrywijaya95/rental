@@ -21,7 +21,6 @@ public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", ignore = true)
-    @Mapping(target = "token", ignore = true)
     @Mapping(target = "code", ignore = true)
     @Mapping(target = "password", ignore = true)
     User partialUpdate(UserDTO userDTO, @MappingTarget User user);

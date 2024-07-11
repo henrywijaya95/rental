@@ -11,8 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,14 +23,13 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    private UUID token;
-
     @NotNull
     private String name;
 
     @NotNull
     @Column(unique = true, updatable = false)
     private String code;
+
     private String password;
 
     @Convert(converter = RoleConverter.class)

@@ -9,11 +9,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -24,36 +24,32 @@ public class RentService {
     @Autowired
     RentRepository rentRepository;
 
-    public Rent create(UUID token, Rent newRent) {
-        userService.getByToken(token);
-
+    @Transactional(rollbackFor = Throwable.class)
+    public Rent create(Rent newRent) {
         return rentRepository.save(newRent);
     }
 
-    public Rent update(UUID token, Long rentId) {
-        Rent finalizedRent = getById(token, rentId);
+    @Transactional(rollbackFor = Throwable.class)
+    public Rent update( Long rentId) {
+        Rent finalizedRent = getById(rentId);
         finalizedRent.setReturnAt(ZonedDateTime.now());
 
         return rentRepository.save(finalizedRent);
     }
 
-    private Rent getById(UUID token, Long id) {
-        if (token != null) {
-            userService.getByToken(token);
-        }
-
+    @Transactional(rollbackFor = Throwable.class)
+    private Rent getById(Long id) {
         Optional<Rent> optionalRent = rentRepository.findById(id);
 
-        if (optionalRent.isEmpty()) {
+        if (optionalRent.isPresent()) {
             throw new RentalCarException(HttpStatus.NOT_FOUND, "Rent not found", "The rent with the provided id: " + id + " was not found in database.");
         }
 
         return optionalRent.get();
     }
 
-    public List<Rent> getAllCarsRentByClientId(UUID token, Long clientId) {
-        userService.getByToken(token);
-
+    @Transactional(rollbackFor = Throwable.class)
+    public List<Rent> getAllCarsRentByClientId(Long clientId) {
         return rentRepository.findAllByClientId(clientId);
     }
 }
