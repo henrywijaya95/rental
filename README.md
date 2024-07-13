@@ -1,5 +1,12 @@
 -- Service Java untuk web aplikasi admin rental mobil --
 
+1. Setup project : 
+- Lombok plugin
+- Maven Compiler
+- JDK/JRE Version 8
+
+2. List Rest Api :
+
 ### Sign in
 PUT http://localhost:8080/rentalcar/user/signin?code={{manager_code}}&password={{password}}
 
