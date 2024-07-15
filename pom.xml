@@ -15,8 +15,8 @@
 	<description>Car Rental Mini Project</description>
 
 	<properties>
-		<java.version>8</java.version>
-		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+		<java.version>17</java.version>
+		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<hibernate-jpamodelgen.version>6.2.1.Final</hibernate-jpamodelgen.version>
 		<swagger.version>2.9.2</swagger.version>
 		<open.api.version>1.6.9</open.api.version>
@@ -59,7 +59,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.30</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

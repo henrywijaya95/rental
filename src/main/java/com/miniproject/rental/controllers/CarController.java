@@ -7,7 +7,6 @@ import com.miniproject.rental.models.Car;
 import com.miniproject.rental.services.CarService;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
 
 import jakarta.validation.Valid;
 
@@ -28,12 +27,11 @@ import static com.miniproject.rental.utilities.Constants.*;
 @RequestMapping("car/")
 public class CarController {
     @Autowired
-    private CarMapper carMapper;
-
-    @Autowired
     private CarService carService;
 
-    @ApiOperation(value = "return create", authorizations = { @Authorization(value = "jwtToken") })
+    private CarMapper carMapper;
+
+    @ApiOperation(value = "return create")
     @PostMapping(value = "create")
     public ResponseEntity<CarDTO> create(@RequestBody @Valid CarDTO body) {
         Car newCar = carMapper.toModel(body);
@@ -43,7 +41,7 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCarDTO);
     }
 
-    @ApiOperation(value = "return all by brand", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return all by brand")
     @GetMapping(value = "by-brand")
     public ResponseEntity<List<CarDTO>> getAllByBrand(@RequestParam(value = BRAND) String brand) {
         List<Car> carsFound = carService.getByBrand(brand);
@@ -52,7 +50,7 @@ public class CarController {
         return carsDTOFound.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(carsDTOFound);
     }
 
-    @ApiOperation(value = "return all by segment", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return all by segment")
     @GetMapping(value = "by-segment")
     public ResponseEntity<List<CarDTO>> getAllBySegment(@RequestParam(value = SEGMENT) Segment segment) {
         List<Car> carsFound = carService.getBySegment(segment);
@@ -61,7 +59,7 @@ public class CarController {
         return carsDTOFound.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(carsDTOFound);
     }
 
-    @ApiOperation(value = "return availables", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return availables")
     @GetMapping(value = "availables")
     public ResponseEntity<List<CarDTO>> getAvailables() {
         List<Car> carsAvailable = carService.getAvailables();
@@ -70,7 +68,7 @@ public class CarController {
         return carsDTOAvailable.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(carsDTOAvailable);
     }
 
-    @ApiOperation(value = "return all by brand asc", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return all by brand asc")
     @GetMapping(value = "by-brand-asc")
     public ResponseEntity<List<CarDTO>> getCarsByBrand() {
         List<Car> carsByBrand = carService.getCarsByBrand();

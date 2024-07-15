@@ -6,7 +6,6 @@ import com.miniproject.rental.models.Rent;
 import com.miniproject.rental.services.RentService;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
 
 import jakarta.validation.Valid;
 
@@ -27,12 +26,11 @@ import static com.miniproject.rental.utilities.Constants.ID;
 @RequestMapping("rent/")
 public class RentController {
     @Autowired
-    private RentMapper rentMapper;
-
-    @Autowired
     private RentService rentService;
 
-    @ApiOperation(value = "return create", authorizations = { @Authorization(value = "jwtToken") })
+    private RentMapper rentMapper;
+
+    @ApiOperation(value = "return create")
     @PostMapping(value = "create")
     public ResponseEntity<RentDTO> create(@RequestBody @Valid RentDTO body) {
         Rent newRent = rentMapper.toModel(body);
@@ -42,7 +40,7 @@ public class RentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRentDTO);
     }
 
-    @ApiOperation(value = "return update", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return update")
     @PutMapping(value = "update")
     public ResponseEntity<RentDTO> update(@RequestParam(value = ID) Long rentId){
         Rent rentUpdated = rentService.update(rentId);
@@ -51,7 +49,7 @@ public class RentController {
         return ResponseEntity.ok().body(rentDTOUpdated);
     }
 
-    @ApiOperation(value = "return all by client id", authorizations = { @Authorization(value = "jwtToken") })
+    @ApiOperation(value = "return all by client id")
     @GetMapping(value = "by-user")
     public ResponseEntity<List<RentDTO>> getAllCarsRentByClientId(@RequestParam(value = ID) Long clientId){
         List<Rent> rents = rentService.getAllCarsRentByClientId(clientId);

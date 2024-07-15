@@ -8,25 +8,19 @@ import com.miniproject.rental.models.User;
 import com.miniproject.rental.repositories.CarRepository;
 import com.miniproject.rental.repositories.UserRepository;
 
-import lombok.RequiredArgsConstructor;
-
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class RentMapperUtil {
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    private final CarRepository carRepository;
+    @Autowired
+    private CarRepository carRepository;
 
-    private final CarMapper carMapper;
-
-    public RentMapperUtil(UserRepository userRepository, CarRepository carRepository, CarMapper carMapper) {
-        this.userRepository = userRepository;
-        this.carRepository = carRepository;
-        this.carMapper = carMapper;
-    }
+    private CarMapper carMapper;
 
     @Named("findUser")
     public User getUserById(Long id) {

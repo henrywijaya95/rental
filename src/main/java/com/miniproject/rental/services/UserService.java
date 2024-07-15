@@ -2,7 +2,6 @@ package com.miniproject.rental.services;
 
 import com.miniproject.rental.dtos.UserDTO;
 import com.miniproject.rental.exceptions.RentalCarException;
-import com.miniproject.rental.mappers.UserMapper;
 import com.miniproject.rental.models.User;
 import com.miniproject.rental.repositories.UserRepository;
 import com.miniproject.rental.utilities.Constants;
@@ -22,9 +21,6 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Transactional(rollbackFor = Throwable.class)
     public User signIn(String code, String password) {

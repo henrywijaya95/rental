@@ -6,12 +6,11 @@ import com.miniproject.rental.models.Rent;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
 import org.mapstruct.NullValueCheckStrategy;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, uses = {RentMapperUtil.class})
+@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, uses = {RentMapperUtil.class})
 public interface RentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "returnAt", ignore = true)
